@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Homepage from "./components/Homepage";
 import About from "./components/About";
 import AddPantry from "./components/AddPantry";
+import PantryId from "./components/PantryId";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Route exact path="/" component={Homepage} />
       <Route exact path="/about" component={About} />
       <Route exact path="/add" component={AddPantry} />
+      <Route exact path="/pantry/:id" component={PantryId} />
     </Router>
   );
 }
