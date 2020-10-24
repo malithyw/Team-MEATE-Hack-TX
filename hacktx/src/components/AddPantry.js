@@ -1,3 +1,6 @@
+import react from "react";
+import { db } from "../firebase";
+
 const dbsettest = async () => {
   await db
     .collection("test")
