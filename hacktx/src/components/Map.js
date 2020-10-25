@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import GoogleMapReact from "google-map-react";
-import useSupercluster from "use-supercluster";
 import { db } from "../firebase";
 
 const Marker = ({ text }) => <div>{text}</div>;
