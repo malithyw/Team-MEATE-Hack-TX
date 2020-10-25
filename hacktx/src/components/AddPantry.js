@@ -1,4 +1,4 @@
-import react from "react";
+import React from "react";
 import { db } from "../firebase";
 
 const dbsettest = async () => {
@@ -8,7 +8,7 @@ const dbsettest = async () => {
     .set({
       name: "local church pantry",
       lat: 50,
-      lon: 50,
+      lng: 50,
       inventory: {
         canned_peas: 5,
         bread: 10,
