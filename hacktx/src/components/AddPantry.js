@@ -7,12 +7,12 @@ function AddPantry(props){
   
   const dbsettest = async () => {
     await db
-      .collection("test")
-      .doc("test")
-      .set({
+      .collection("pantries")
+      .add({
         name: {name},
-        lat: {lat},
-        lon: {long},
+        lon: parseFloat({long}),
+        lat: parseFloat({lat}),
+        info: {info},
         inventory: {
           canned_peas: 5,
           bread: 10,
@@ -22,28 +22,36 @@ function AddPantry(props){
   };
   
   const dbgettest = async () => {
-    const doc = await db.collection("test").doc("test").get();
+    const doc = await db.collection("pantries").get();
     console.log(doc.data());
   };
 
   const [name, setName] = useState('name')
-  const [lat, setLat] = useState('latitude')
-  const [long, setLong] = useState('longitude')
+  const [lat, setLat] = useState(0)
+  const [long, setLong] = useState(0)
+  const [info, setInfo] = useState('some info about your pantry')
+
   const onChangeName = (event) =>{
     setName(event.target.value)
     console.log('typing')
     console.log(event.target.value)
   }
   const onChangeLat = (event) =>{
-    setLat(event.target.value)
+    setLat(parseFloat(event.target.value))
     console.log('typing')
     console.log(event.target.value)
   }
   const onChangeLong = (event) =>{
-    setLong(event.target.value)
+    setLong(parseFloat(event.target.value))
     console.log('typing')
     console.log(event.target.value)
   }
+  const onChangeInfo = (event) =>{
+    setInfo(event.target.value)
+    console.log('typing')
+    console.log(event.target.value)
+  }
+
   return (
     <div>
       <h1>Form Goes Here</h1>
@@ -60,6 +68,10 @@ function AddPantry(props){
           <div>
             <label htmlFor="long">Longitude of your pantry</label>
             <input type="text" name="long" placeholder={long} onChange={onChangeLong}/>
+          </div>
+          <div>
+            <label htmlFor="info">Some info about your pantry</label>
+            <input type="text" name="info" placeholder={info} onChange={onChangeInfo}/>
           </div>
       </form>
       <p>maybe select location on map?</p>
