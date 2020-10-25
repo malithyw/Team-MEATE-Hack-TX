@@ -2,8 +2,11 @@ import React, { useState, useRef, useEffect } from "react";
 import GoogleMapReact from "google-map-react";
 import { db } from "../firebase";
 
+//A pantry as it appears on the map. Should probably be an icon+text? Hover functionality would
+//be even better but idk we can pull that off
 const Marker = ({ text }) => <div>{text}</div>;
 
+//A pantry as it appears in the list. This should ideally be limited to nearby pantries
 const Pantry = ({ name, info, inventory }) => {
   return (
     <div>
@@ -17,6 +20,7 @@ const Pantry = ({ name, info, inventory }) => {
   );
 };
 
+//get all pantries from the database, populate pantries and markers
 const getMarkers = async () => {
   let markers = [];
   let pdata = [];
@@ -49,10 +53,11 @@ const getMarkers = async () => {
 };
 
 const SimpleMap = (props) => {
-  const [center, setCenter] = useState(props.center);
   const [markers, setMarkers] = useState([]);
   const [pdata, setPdata] = useState([]);
+  const mapRef = useRef();
 
+  //when the component loads call getMarkers
   useEffect(() => {
     getMarkers().then((m) => {
       setPdata(m[0]);
@@ -68,6 +73,10 @@ const SimpleMap = (props) => {
         bootstrapURLKeys={{ key: "AIzaSyBr3jG4WaMURx2HRwsWgHoXpSrMdVf-BtA" }}
         defaultCenter={props.center}
         defaultZoom={10}
+        yesIWantToUseGoogleMapApiInternals
+        onGoogleApiLoaded={({ map }) => {
+          mapRef.current = map;
+        }}
       >
         {markers}
       </GoogleMapReact>
